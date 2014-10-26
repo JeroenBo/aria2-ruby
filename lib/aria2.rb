@@ -141,6 +141,16 @@ module Aria2
 			status
 		end
 
+		def self.addTorrent(torrent)
+			gid = self.rpc_call('addTorrent', [torrent]) == torrent
+			gid
+		end
+
+		def self.addTorrentFile(filename)
+			torrent = Base64.encode64(File.open(filename, "rb").read)
+			gid = self.addTorrent(torrent)
+			gid
+		end
 
 		def self.query_status(gid)
 			status = self.rpc_call('tellStatus', [gid, [
