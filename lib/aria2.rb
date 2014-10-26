@@ -152,6 +152,11 @@ module Aria2
 			gid
 		end
 
+		def self.getActive()
+			status = self.rpc_call('tellActive', [])
+			status	
+		end
+
 		def self.query_status(gid)
 			status = self.rpc_call('tellStatus', [gid, [
 				'status', 
